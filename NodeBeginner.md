@@ -103,7 +103,35 @@ The source code of the finished application is available through the NodeBeginne
 
 ## javascript和Node.js
 ### javascript与你之间
+
+在我们讨论技术相关的东西之前，我们先花点时间来谈谈你和javascript之间的关系，这主要是为了确保之后的章节阅读对你而言是有意义的。
+
+如果你和我一样， 在很久以前就使用html'开发'HTML文档，你遇到了javascript这个有趣的东西， 但是你仅仅只是用它来进行简单的操作，为你的网站添加交互性。
+
+而你真正想要的是'干货'，你想知道如何构建一个复杂的网站， 你学习了诸如PHP,Ruby,Java的编程语言，开始写起了后端代码。
+
+虽然， 你关注着javascript, 你看到了jquery的介绍， Prototype等，很多在javascript领域中的东西似乎越来越高级，而javascript这门语言也不仅仅只是window.open()这么简单了。
+
+尽管用jquery来随心加强你的web页面的时候， 你会觉得很棒， 但那最终都是前端的东西，到最后，充其量你只是javascript的使用者， 而非开发者。
+
+接着， 出现了Node.js, 服务器端的javascript, so cool~
+
+你决定， 是时候好好审视下过去与现在的jacascript了， 但是，别着急， 写Node.js应用是一件事，明白它为什么需要这样写， 以及这样写的意义——了解Javascript,这次来真的了。
+
+问题来了： 由于javascript是以两种形态存在的，甚至也许是三种，发现一种学习javascript的正确方式并不简单。为了让你在写Node.js应用的时候感受你不仅仅只是在使用JavaScript，而是在开发它，并非是一件易事。
+
+我的目标就是为你提供方向。
+
 ### 注意事项
+
+业界真的有很多杰出的javascript程序员， 但是我并不是其中一员。
+
+我仅仅只是我在前一章节提到的那个我。对于后端开发web应用我倒是略知一二，但是对于Node.js，我完全是一个新手。最近我学习了一些javascript的高级特性的概念，但没有实战。
+
+所以这不是一本"从初学到精通"的书籍， 这更像是一本"从初级到高级"的书。
+
+如果我成功的话， 这本书将会是像在我学Node.js的时候最希望拥有的教程。
+
 ### 服务器端javascript
 ### HelloWorld
 
