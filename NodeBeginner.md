@@ -226,8 +226,95 @@ Node.js实际上就是另外一种上下文，它允许你在除了浏览器平�
 
 接下来，我们来分析这里实际发生了什么。
 
+在代码的第一行引入了Node.js自带的`http`module,并赋值给http变量。
 
+我们可以调用http模块提供的函数：createServer。这个函数返回一个对象，这个对象有一个listen方法，该方法有一个数值参数， 指定这个http服务器监听的端口号。
 
+我们暂时先忽略http.createServer()括号里面的函数的定义。
+
+我们可以像下面这样写代码，并且在8888端口监听：
+
+```
+    var http = require('http');
+    var server = http.createServer();
+    server.listen(8888);
+```
+以上代码将会启动一个HTTP服务器，监听8888端口并不做任何操作(甚至对请求都不会响应)。
+
+最有趣的部分是createServer()中的第一个参数——函数的定义。
+
+实际上， 在createServer()中的第一个参数也是唯一一个参数。因为在javaScript中，函数可以像其他值一样被传递。
 
 ### 传递函数
+
+你可以做这些事情， 如下所示：
+
+```
+    function say(word) {
+        console.log(word);
+    }
+
+    function execute(fun, value) {
+        fun(value);
+    }
+
+    execute(say, 'Hello');
+```
+
+仔细阅读上面的代码，我们为execute传递了一个say方法作为第一个参数，而不是say的返回值。
+
+因此, say就变成了execute中的本地变量——fun, execute可以通过fun()的方式来使用say函数。
+
+当然了， 因为say带了一个参数， 所以execute在调用fun的时候也可以传递该参数。
+
+正如我们刚才做的，我们可以将一个函数的名字作为参数传递给其他的函数，但我们并不是说非要走先定义，再传递这条路，我们可以定义并且以参数的形式将函数传递给另外一个函数。
+
+```
+    function execute(fun, value) {
+        fun(value);
+    }
+    execute(function(world){
+        console.log(world);
+    }, "hello");
+```
+
+我们在execute接受第一个参数的地方直接定义了我们准备传递给execute的函数。
+
+使用这种方式，我们甚至不用给出方法名，这种方式就叫做匿名函数。
+
+这是我第一感受到被称为"高阶"的javascript。不过我们还是循序渐进吧。现在，我们先接收这点： 我们在调用另一个函数的时候可以传递一个函数作为参数。我们可以先声明函数， 再传递，或者说在传递参数的时候去传递。
+
 ### 函数传递如何使http服务器运作
+
+了解了以上的知识以后， 我们来看看我们的极简版Http服务器：
+
+```
+    var http = require("http");
+    http.createServer(function(req, res){
+        res.writeHead(200, {"Content-Type": "text/plain"});
+        res.write("hello world");
+        res.end();
+    }).listen(8888);
+```
+
+现在再来看这段代码， 它做了什么就很清晰明了了： 我们给createServer传递了一个匿名函数。
+
+我们也可以根据以下代码来实现上述功能：
+
+```
+    var http = require("http");
+    function onRequest(request, response) {
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.write("Hello World");
+        response.end();
+    }
+
+    http.createServer(onRequest).listen(8888);
+```
+
+现在， 也许是问： 为什么我们要这样做的？ 的绝佳时刻~~~
+
+
+#### tips: 英文版免费章节就到处结束了，，，，可以看官网上的中文版，更新到本书完，我就不做搬运工了，附上链接：
+
+https://www.nodebeginner.org/index-zh-cn.html
