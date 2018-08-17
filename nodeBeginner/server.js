@@ -1,18 +1,16 @@
-var http = require("http");
+const http = require("http");
+const url = require("url");
 
-var server = http.createServer(serverFunction);
-
-function serverFunction(request, response) {
-    console.log(request.method);
-    console.log(request.url);
-    console.log(request.headers);
-
-    response.statusCode = 200;
-    response.writeHead(200, {"Content-Type": "text/html","char-set": "utf-8"});
-    response.setHeader('Content-Type', 'text/html; charset=utf-8');
-    response.setHeader('name','aliveAmy');
-    response.write(new Date().toString());
-    response.end();
+function start(route) {
+    function onRequest(req, res) {
+        const { pathname } = url.parse(req.url);
+        route(pathname);
+        res.writeHead(200, {"Content-Type": "text/plain"});
+        res.write("hello world");
+        res.end();
+    }
+    const server = http.createServer(onRequest);
+    server.listen(8081);
 }
-server.listen(8080, 'localhost')
-// server.listen(8080);
+
+exports.start = start;
